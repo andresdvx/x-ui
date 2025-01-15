@@ -11,6 +11,12 @@ interface CarouselProps {
   footerControl?: boolean;
 }
 
+/**
+*Carousel component to display images in a carousel
+*@param images: Array of images to be displayed in the carousel
+*@param index: Index of the image to be displayed first
+*@param footerControl: Boolean to display footer control
+*/
 export const Carousel = ({images = [],index = 0,footerControl = false}: CarouselProps) => {
 
   const [currentImg, setCurrentImg] = useState<string>("");
