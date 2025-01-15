@@ -1,14 +1,38 @@
-import './Carousel.css'
+import { useEffect, useState } from "react";
+import imagesLimits from "./imagesLimits";
+import "./Carousel.css";
 
 interface FooterControlProps {
   images: string[];
   setCurrentImgIndex: (index: number) => void;
 }
 
-const FooterControl = ({ images, setCurrentImgIndex } : FooterControlProps) => {
+const FooterControl = ({ images, setCurrentImgIndex }: FooterControlProps) => {
+  const [carouselWidth, setCarouselWidth] = useState<number>(0);
+  const [imagesLimit, setImagesLimit] = useState<number>(0);
+
+  useEffect(() => {
+    const carousel = document.getElementById("carousel");
+    if (carousel) {
+      setCarouselWidth(
+        parseFloat(carousel.getBoundingClientRect().width.toString())
+      );
+    }
+  }, [imagesLimit, carouselWidth]);
+
+  useEffect(() => {
+    const foundLimit = imagesLimits.find((limit) => {
+      return carouselWidth >= limit.starts && carouselWidth <= limit.ends;
+    });
+    if (foundLimit) setImagesLimit(foundLimit.limit);
+  }, [carouselWidth]);
+
   return (
     <div className="footer-control">
       {images.map((image, index) => {
+        if (index > imagesLimit - 1) {
+          return null;
+        }
         return (
           <img
             src={image}
@@ -24,4 +48,3 @@ const FooterControl = ({ images, setCurrentImgIndex } : FooterControlProps) => {
 };
 
 export default FooterControl;
-

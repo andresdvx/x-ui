@@ -34,7 +34,7 @@ export const Carousel = ({images = [],index = 0,footerControl = false}: Carousel
 
   return (
     <>
-      <figure className="carousel">
+      <figure className="carousel" id="carousel">
         <LeftArrow
           setCurrentImgIndex={setCurrentImgIndex}
           currentImgIndex={currentImgIndex}
