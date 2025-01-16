@@ -9,6 +9,7 @@ interface CarouselProps {
   images: string[];
   index?: number;
   footerControl?: boolean;
+  footerControlOrientation?: "horizontal" | "vertical";
 }
 
 /**
@@ -16,8 +17,9 @@ interface CarouselProps {
 *@param images: Array of images to be displayed in the carousel
 *@param index: Index of the image to be displayed first
 *@param footerControl: Boolean to display footer control
+*@param footerControlOrientation: Orientation of the footer control
 */
-export const Carousel = ({images = [],index = 0,footerControl = false}: CarouselProps) => {
+export const Carousel = ({images = [],index = 0,footerControl = false, footerControlOrientation = "horizontal"}: CarouselProps) => {
 
   const [currentImg, setCurrentImg] = useState<string>("");
   const [currentImgIndex, setCurrentImgIndex] = useState<number>(index);
@@ -33,8 +35,8 @@ export const Carousel = ({images = [],index = 0,footerControl = false}: Carousel
   }, [currentImgIndex, images]);
 
   return (
-    <>
-      <figure className="carousel" id="carousel">
+    <div className={`carousel-container-${footerControlOrientation}`}>
+      <figure className={`carousel-${footerControlOrientation}`} id="carousel">
         <LeftArrow
           setCurrentImgIndex={setCurrentImgIndex}
           currentImgIndex={currentImgIndex}
@@ -58,10 +60,11 @@ export const Carousel = ({images = [],index = 0,footerControl = false}: Carousel
       {footerControl ? (
         <FooterControl
           images={images}
+          footerControlOrientation={footerControlOrientation}
           setCurrentImgIndex={setCurrentImgIndex}
         />
       ) : null}
-    </>
+    </div>
   );
 };
 

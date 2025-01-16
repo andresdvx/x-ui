@@ -4,10 +4,11 @@ import "./Carousel.css";
 
 interface FooterControlProps {
   images: string[];
+  footerControlOrientation?: "horizontal" | "vertical";
   setCurrentImgIndex: (index: number) => void;
 }
 
-const FooterControl = ({ images, setCurrentImgIndex }: FooterControlProps) => {
+const FooterControl = ({ images, setCurrentImgIndex, footerControlOrientation = "horizontal" }: FooterControlProps) => {
   const [carouselWidth, setCarouselWidth] = useState<number>(0);
   const [imagesLimit, setImagesLimit] = useState<number>(0);
 
@@ -28,7 +29,7 @@ const FooterControl = ({ images, setCurrentImgIndex }: FooterControlProps) => {
   }, [carouselWidth]);
 
   return (
-    <div className="footer-control">
+    <div className={`footer-control-${footerControlOrientation}`}>
       {images.map((image, index) => {
         if (index > imagesLimit - 1) {
           return null;

@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+.carousel-container-horizonal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* controles de flecha */
 
 .leftArrowButton {
@@ -42,17 +52,22 @@
   display: flex;
 }
 
-.carousel:hover .leftArrowButton,
-.carousel:hover .rightArrowButton {
+.carousel-horizontal:hover .leftArrowButton,
+.carousel-horizontal:hover .rightArrowButton {
+  opacity: 1;
+}
+
+.carousel-vertical:hover .leftArrowButton,
+.carousel-vertical:hover .rightArrowButton {
   opacity: 1;
 }
 
 /* Carrusel principal */
 
-.carousel {
+.carousel-horizontal {
   position: relative;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 90%;
   object-fit: cover;
 }
 
@@ -93,14 +108,14 @@
 
 /* footer control */
 
-.footer-control {
+.footer-control-horizontal {
   display: flex;
   justify-content: center;
   margin: 0 auto;
   gap: 1rem;
 }
 
-.footer-control img {
+.footer-control-horizontal img {
   width: 100%;
   height: 35px;
   margin-top: 0.25rem;
@@ -108,6 +123,42 @@
   cursor: pointer;
 }
 
-.footer-control img:hover {
+.footer-control-horizontal img:hover {
+  cursor: pointer;
+}
+
+/* estilos vertical */
+
+.carousel-container-vertical {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carousel-vertical {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.footer-control-vertical {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-evenly;
+}
+
+.footer-control-vertical img {
+  width: 100%;
+  height: 40px;
+  margin-top: 0.25rem;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.footer-control-vertical img:hover {
   cursor: pointer;
 }

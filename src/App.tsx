@@ -13,7 +13,7 @@ function App() {
   return (
     <main style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "#1c2b38" }}>
       <div style={{ width: "350px", height: "350px" }}>
-        <Carousel images={images} footerControl/>
+        <Carousel images={images}  footerControl footerControlOrientation="vertical"/>
       </div>
     </main>
   );
