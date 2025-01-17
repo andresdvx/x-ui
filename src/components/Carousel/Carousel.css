@@ -53,12 +53,14 @@
 }
 
 .carousel-horizontal:hover .leftArrowButton,
-.carousel-horizontal:hover .rightArrowButton {
+.carousel-horizontal:hover .rightArrowButton,
+.carousel-horizontal:hover .carouselFooter {
   opacity: 1;
 }
 
 .carousel-vertical:hover .leftArrowButton,
-.carousel-vertical:hover .rightArrowButton {
+.carousel-vertical:hover .rightArrowButton,
+.carousel-horizontal:hover .carouselFooter {
   opacity: 1;
 }
 
@@ -91,7 +93,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
 }
 
 .carouselFooterInfo {
