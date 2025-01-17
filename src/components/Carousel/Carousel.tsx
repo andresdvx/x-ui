@@ -38,9 +38,9 @@ export const Carousel = ({images = [],index = 0,footerControl = false, footerCon
     <div className={`carousel-container-${footerControlOrientation}`}>
       <figure className={`carousel-${footerControlOrientation}`} id="carousel">
         <LeftArrow
-          setCurrentImgIndex={setCurrentImgIndex}
           currentImgIndex={currentImgIndex}
           imagesLength={images.length}
+          setCurrentImgIndex={setCurrentImgIndex}
         />
         <img
           alt="img"
@@ -48,13 +48,14 @@ export const Carousel = ({images = [],index = 0,footerControl = false, footerCon
           className={`carousel-images ${isFading ? "fade-out" : ""}`}
         />
         <RightArrow
-          setCurrentImgIndex={setCurrentImgIndex}
           currentImgIndex={currentImgIndex}
           imagesLength={images.length}
+          setCurrentImgIndex={setCurrentImgIndex}
         />
         <CarouselFooter
           currentImgIndex={currentImgIndex}
           imagesLength={images.length}
+          setCurrentImgIndex={setCurrentImgIndex}
         />
       </figure>
       {footerControl ? (

@@ -3,17 +3,17 @@ import "./App.css";
 
 function App() {
   const images = [
-    "https://i.pinimg.com/736x/af/63/e2/af63e2494e03902c55e0081b560fc994.jpg",
+    "https://i.pinimg.com/236x/fa/02/e5/fa02e5304285590b85b85d57ef5fc1ba.jpg",
     "https://i.pinimg.com/736x/89/a0/39/89a039205effc7b87d7ee11598118449.jpg",
     "https://i.pinimg.com/736x/45/84/85/4584853771196c5b50f74b77e5085a14.jpg",
-    "https://i.pinimg.com/236x/ab/bb/33/abbb337252b44c09b68937fea8e6464b.jpg",
-    "https://i.pinimg.com/474x/d5/f7/24/d5f724c66be3957bd4d87898a2ce9325.jpg"
+    "https://i.pinimg.com/236x/8b/73/ff/8b73ff7533cc8311530c38769f441e61.jpg",
+    "https://i.pinimg.com/236x/20/1f/95/201f9558f128d2405e2a9146c45c3b29.jpg"
   ];
 
   return (
     <main style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "#1c2b38" }}>
-      <div style={{ width: "350px", height: "350px" }}>
-        <Carousel images={images}  footerControl footerControlOrientation="vertical"/>
+      <div style={{ width: "400px", height: "350px" }}>
+        <Carousel images={images} footerControl footerControlOrientation="vertical"/>
       </div>
     </main>
   );
