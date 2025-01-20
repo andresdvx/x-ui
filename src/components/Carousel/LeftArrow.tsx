@@ -2,27 +2,14 @@ import React from "react";
 import LeftArrowIcon from "./svg/LeftArrowIcon";
 import "./Carousel.css";
 
-interface LeftArrowProps {
-  setCurrentImgIndex: (index: number) => void;
-  currentImgIndex: number;
+interface LeftArrowProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
   imagesLength: number;
 }
 
-const LeftArrow = ({ setCurrentImgIndex, currentImgIndex, imagesLength } : LeftArrowProps) => {
-
-  const handleClick = (evt : React.MouseEvent<HTMLButtonElement>) => {
-    
-    evt.stopPropagation();
-    
-    if (currentImgIndex === 0) {
-      setCurrentImgIndex(imagesLength - 1);
-      return;
-    }
-    setCurrentImgIndex(currentImgIndex - 1);
-  };
+const LeftArrow = ({imagesLength, ...props } : LeftArrowProps) => {
 
   return imagesLength == 1 ? null : (
-    <button className="leftArrowButton" onClick={handleClick} aria-label="left arrow">
+    <button className="leftArrowButton" {...props} aria-label="left arrow">
       <LeftArrowIcon />
     </button>
   );

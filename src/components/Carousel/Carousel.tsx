@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import LeftArrow from "./LeftArrow";
 import RightArrow from "./RightArrow";
 import CarouselFooter from "./CarouselFooter";
@@ -14,18 +15,33 @@ interface CarouselProps {
 }
 
 /**
-*Carousel component to display images in a carousel
-*@param images: Array of images to be displayed in the carousel
-*@param index: Index of the image to be displayed first
-*@param footerIndicator: Boolean to display footer indicator
-*@param footerControl: Boolean to display footer control
-*@param footerControlOrientation: Orientation of the footer control
-*/
-export const Carousel = ({images = [],index = 0,footerIndicator = true, footerControl = false, footerControlOrientation = "horizontal"}: CarouselProps) => {
-
+ *Carousel component to display images in a carousel
+ *@param images: Array of images to be displayed in the carousel
+ *@param index: Index of the image to be displayed first
+ *@param footerIndicator: Boolean to display footer indicator
+ *@param footerControl: Boolean to display footer control
+ *@param footerControlOrientation: Orientation of the footer control
+ */
+export const Carousel = ({
+  images = [],
+  index = 0,
+  footerIndicator = true,
+  footerControl = false,
+  footerControlOrientation = "horizontal",
+}: CarouselProps) => {
   const [currentImg, setCurrentImg] = useState<string>("");
   const [currentImgIndex, setCurrentImgIndex] = useState<number>(index);
   const [isFading, setIsFading] = useState<boolean>(false);
+
+  const handleImgIndexChange = (direction: "increase" | "decrease") => {
+    setCurrentImgIndex((prevIndex) => {
+      if (direction === "increase") {
+        return (prevIndex + 1) % images.length;
+      } else {
+        return (prevIndex - 1 + images.length) % images.length;
+      }
+    });
+  };
 
   useEffect(() => {
     setIsFading(true);
@@ -34,15 +50,14 @@ export const Carousel = ({images = [],index = 0,footerIndicator = true, footerCo
       setIsFading(false);
     }, 250);
     return () => clearTimeout(timeoutId);
-  }, [currentImgIndex, images]);
+  }, [currentImgIndex]);
 
   return (
     <div className={`carousel-container-${footerControlOrientation}`}>
       <figure className={`carousel-${footerControlOrientation}`} id="carousel">
         <LeftArrow
-          currentImgIndex={currentImgIndex}
+          onClick={() => handleImgIndexChange("decrease")}
           imagesLength={images.length}
-          setCurrentImgIndex={setCurrentImgIndex}
         />
         <img
           alt="img"
@@ -50,19 +65,16 @@ export const Carousel = ({images = [],index = 0,footerIndicator = true, footerCo
           className={`carousel-images ${isFading ? "fade-out" : ""}`}
         />
         <RightArrow
-          currentImgIndex={currentImgIndex}
+          onClick={() => handleImgIndexChange("increase")}
           imagesLength={images.length}
-          setCurrentImgIndex={setCurrentImgIndex}
         />
-        {
-          footerIndicator ? (
-            <CarouselFooter
-              currentImgIndex={currentImgIndex}
-              imagesLength={images.length}
-              setCurrentImgIndex={setCurrentImgIndex}
-            />
-          ) : null
-        }
+        {footerIndicator ? (
+          <CarouselFooter
+            currentImgIndex={currentImgIndex}
+            imagesLength={images.length}
+            setCurrentImgIndex={setCurrentImgIndex}
+          />
+        ) : null}
       </figure>
       {footerControl ? (
         <FooterControl
