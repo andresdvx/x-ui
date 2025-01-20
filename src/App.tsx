@@ -22,7 +22,7 @@ function App() {
       }}
     >
       <div style={{ width: "350px", height: "350px" }}>
-        <Carousel images={images} footerIndicator={false} />
+        <Carousel images={images} footerIndicator={true} />
       </div>
     </main>
   );
