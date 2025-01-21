@@ -1,32 +1,14 @@
-import { useEffect, useState } from "react";
-import imagesLimits from "./imagesLimits";
+import { useSetFooterControlDimentions } from "./hooks/useSetFooterControlDimentions";
 import "./Carousel.css";
 
 interface FooterControlProps {
   images: string[];
-  footerControlOrientation?: "horizontal" | "vertical";
   setCurrentImgIndex: (index: number) => void;
+  footerControlOrientation?: "horizontal" | "vertical";
 }
 
 const FooterControl = ({ images, setCurrentImgIndex, footerControlOrientation = "horizontal" }: FooterControlProps) => {
-  const [carouselWidth, setCarouselWidth] = useState<number>(0);
-  const [imagesLimit, setImagesLimit] = useState<number>(0);
-
-  useEffect(() => {
-    const carousel = document.getElementById("carousel");
-    if (carousel) {
-      setCarouselWidth(
-        parseFloat(carousel.getBoundingClientRect().width.toString())
-      );
-    }
-  }, [imagesLimit, carouselWidth]);
-
-  useEffect(() => {
-    const foundLimit = imagesLimits.find((limit) => {
-      return carouselWidth >= limit.starts && carouselWidth <= limit.ends;
-    });
-    if (foundLimit) setImagesLimit(foundLimit.limit);
-  }, [carouselWidth]);
+  const { imagesLimit } = useSetFooterControlDimentions(footerControlOrientation);
 
   return (
     <div className={`footer-control-${footerControlOrientation}`}>
