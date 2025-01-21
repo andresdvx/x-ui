@@ -7,8 +7,14 @@ interface FooterControlProps {
   footerControlOrientation?: "horizontal" | "vertical";
 }
 
-const FooterControl = ({ images, setCurrentImgIndex, footerControlOrientation = "horizontal" }: FooterControlProps) => {
-  const { imagesLimit } = useSetFooterControlDimentions(footerControlOrientation);
+const FooterControl = ({
+  images,
+  setCurrentImgIndex,
+  footerControlOrientation = "horizontal",
+}: FooterControlProps): JSX.Element => {
+  const { imagesLimit } = useSetFooterControlDimentions(
+    footerControlOrientation
+  );
 
   return (
     <div className={`footer-control-${footerControlOrientation}`}>

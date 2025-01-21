@@ -11,7 +11,7 @@ const CarouselFooter = ({
   currentImgIndex,
   imagesLength,
   setCurrentImgIndex,
-}: CarouselFooterProps) => {
+}: CarouselFooterProps): JSX.Element => {
   const showedImages = Array.from({
     length: imagesLength >= 5 ? 5 : imagesLength,
   });

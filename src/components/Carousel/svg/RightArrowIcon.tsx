@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-function RightArrowIcon(props : SVGProps<SVGSVGElement>) {
+function RightArrowIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg
       fill="white"
