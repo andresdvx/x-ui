@@ -17,7 +17,7 @@ const FooterControl = ({
   );
 
   return (
-    <div className={`footer-control-${footerControlOrientation}`}>
+    <div className={`footer-control-${footerControlOrientation}`} aria-label="footer-control">
       {images.map((image, index) => {
         if (index > imagesLimit - 1) {
           return null;

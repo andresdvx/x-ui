@@ -17,7 +17,7 @@ const CarouselFooter = ({
   });
 
   return (
-    <footer className="carouselFooter" aria-label="carousel footer">
+    <footer className="carouselFooter" id="footer-indicator" aria-label="footer-indicator">
       <div
         style={{
           display: "flex",
