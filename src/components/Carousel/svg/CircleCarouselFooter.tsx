@@ -1,12 +1,16 @@
-import React from 'react';
+import React from "react";
 
 interface CircleProps {
   size?: number;
-  color?: string; 
+  color?: string;
   setCurrentImgIndex?: (index: number) => void;
 }
 
-const Circle: React.FC<CircleProps> = ({ size = 20, color = '#007bff', setCurrentImgIndex}) => {
+const Circle: React.FC<CircleProps> = ({
+  size = 20,
+  color = "#007bff",
+  setCurrentImgIndex,
+}): JSX.Element => {
   return (
     <svg
       width={size}
@@ -17,16 +21,15 @@ const Circle: React.FC<CircleProps> = ({ size = 20, color = '#007bff', setCurren
     >
       <circle cx="50" cy="50" r="45" fill={color} />
 
-        <text
-          x="50"
-          y="55"
-          fontSize="30"
-          fill="white"
-          textAnchor="middle"
-          alignmentBaseline="middle"
-          fontFamily="Arial, sans-serif"
-        />
-     
+      <text
+        x="50"
+        y="55"
+        fontSize="30"
+        fill="white"
+        textAnchor="middle"
+        alignmentBaseline="middle"
+        fontFamily="Arial, sans-serif"
+      />
     </svg>
   );
 };

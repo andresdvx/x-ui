@@ -20,14 +20,13 @@ function App() {
         backgroundColor: "#1c2b38",
       }}
     >
-      <div style={{ width: "400px", height: "300px"}}>
-        <Carousel
-          images={images}
-          footerIndicator={true}
-          footerControl
-          footerControlOrientation="vertical"
-        />
-      </div>
+      <Carousel
+        style={{ width: "430px", height: "340px" }}
+        images={images}
+        footerIndicator
+        footerControl
+        footerControlOrientation="vertical"
+      />
     </main>
   );
 }

@@ -6,7 +6,8 @@ import FooterControl from "./FooterControl";
 import { useEffect, useState } from "react";
 import "./Carousel.css";
 
-interface CarouselProps {
+interface CarouselProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
   images: string[];
   index?: number;
   footerIndicator?: boolean;
@@ -15,12 +16,17 @@ interface CarouselProps {
 }
 
 /**
- *Carousel component to display images in a carousel
- *@param images: Array of images to be displayed in the carousel
- *@param index: Index of the image to be displayed first
- *@param footerIndicator: Boolean to display footer indicator
- *@param footerControl: Boolean to display footer control
- *@param footerControlOrientation: Orientation of the footer control
+ * Carousel component that displays a series of images with optional footer indicators and controls.
+ *
+ * @param {CarouselProps} props - The properties for the Carousel component.
+ * @param {string[]} props.images - An array of image URLs to be displayed in the carousel.
+ * @param {number} [props.index=0] - The initial index of the image to be displayed.
+ * @param {boolean} [props.footerIndicator=true] - Whether to display footer indicators for the images.
+ * @param {boolean} [props.footerControl=false] - Whether to display footer controls for navigating the images.
+ * @param {"horizontal" | "vertical"} [props.footerControlOrientation="horizontal"] - The orientation of the footer controls.
+ * @param {React.HTMLAttributes<HTMLDivElement>} props - Additional HTML attributes to be applied to the carousel container.
+ *
+ * @returns {JSX.Element} The rendered Carousel component.
  */
 export const Carousel = ({
   images = [],
@@ -28,7 +34,8 @@ export const Carousel = ({
   footerIndicator = true,
   footerControl = false,
   footerControlOrientation = "horizontal",
-}: CarouselProps) => {
+  ...props
+}: CarouselProps): JSX.Element => {
   const [currentImg, setCurrentImg] = useState<string>("");
   const [currentImgIndex, setCurrentImgIndex] = useState<number>(index);
   const [isFading, setIsFading] = useState<boolean>(false);
@@ -53,7 +60,7 @@ export const Carousel = ({
   }, [currentImgIndex]);
 
   return (
-    <div className={`carousel-container-${footerControlOrientation}`}>
+    <div id={`carousel-container-${footerControlOrientation}`} {...props}>
       <figure className={`carousel-${footerControlOrientation}`} id="carousel">
         <LeftArrow
           onClick={() => handleImgIndexChange("decrease")}

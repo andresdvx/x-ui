@@ -6,7 +6,7 @@ interface RightArrowProps
   imagesLength: number;
 }
 
-const RightArrow = ({ imagesLength, ...props }: RightArrowProps) => {
+const RightArrow = ({ imagesLength, ...props }: RightArrowProps): JSX.Element | null => {
   return imagesLength == 1 ? null : (
     <button className="rightArrowButton" {...props} aria-label="right arrow">
       <RightArrowIcon />

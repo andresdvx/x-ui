@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import imagesLimits from "../imagesLimits";
 
-export const useSetFooterControlDimentions = (orientation: string) => {
+interface IFooterControlDimensions {
+  imagesLimit: number;
+}
+
+export const useSetFooterControlDimentions = (
+  orientation: string
+): IFooterControlDimensions => {
   const [carouselWidth, setCarouselWidth] = useState<number>(0);
   const [carouselHeight, setCarouselHeight] = useState<number>(0);
   const [imagesLimit, setImagesLimit] = useState<number>(0);
