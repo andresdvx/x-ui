@@ -16,9 +16,19 @@ const imagesLimits: ImageLimits[] = [
     limit: 4,
   },
   {
-    starts: 400,
+    starts: 350,
     ends: 500,
     limit: 5,
+  },
+  {
+    starts: 500,
+    ends: 700,
+    limit: 6,
+  },
+  {
+    starts: 700,
+    ends: 900,
+    limit: 7,
   },
 ];
 
