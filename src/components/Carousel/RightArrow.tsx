@@ -1,7 +1,6 @@
 import React from "react";
 import RightArrowIcon from "./svg/RightArrowIcon";
 import "./Carousel.css";
-
 interface RightArrowProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   imagesLength: number;

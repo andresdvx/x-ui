@@ -3,7 +3,6 @@ import "./App.css";
 
 function App() {
   const images = [
-    "https://i.pinimg.com/236x/fa/02/e5/fa02e5304285590b85b85d57ef5fc1ba.jpg",
     "https://i.pinimg.com/736x/89/a0/39/89a039205effc7b87d7ee11598118449.jpg",
     "https://i.pinimg.com/736x/45/84/85/4584853771196c5b50f74b77e5085a14.jpg",
     "https://i.pinimg.com/236x/8b/73/ff/8b73ff7533cc8311530c38769f441e61.jpg",
