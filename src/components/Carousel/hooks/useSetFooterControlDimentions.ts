@@ -23,14 +23,14 @@ export const useSetFooterControlDimentions = (
             parseFloat(carousel.getBoundingClientRect().height.toString())
           );
     }
-  }, [carouselWidth, carouselHeight, orientation]);
 
-  useEffect(() => {
     const foundLimit = imagesLimits.find((limit) => {
-      return carouselWidth >= limit.starts && carouselWidth <= limit.ends;
+      return orientation === "horizontal"
+        ? carouselWidth >= limit.starts && carouselWidth < limit.ends
+        : carouselHeight >= limit.starts && carouselHeight < limit.ends;
     });
     if (foundLimit) setImagesLimit(foundLimit.limit);
-  }, [carouselWidth]);
+  }, [carouselWidth, carouselHeight, orientation]);
 
   return { imagesLimit };
 };
