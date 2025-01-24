@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import LeftArrow from "../components/Carousel/LeftArrow";
-import RightArrow from "../components/Carousel/RightArrow";
-import { Carousel } from "../components/Carousel";
+import LeftArrow from "../../components/Carousel/LeftArrow";
+import RightArrow from "../../components/Carousel/RightArrow";
+import { Carousel } from "../../components/Carousel";
 
 describe("carousel general component", () => {
   const images: string[] = [
