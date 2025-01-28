@@ -1,0 +1,10 @@
+
+#select{
+    outline: none;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.option:hover{
+    background-color: red;
+}
