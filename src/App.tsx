@@ -1,4 +1,5 @@
 import { Carousel } from "../index";
+import { Select } from "../index";
 import "./App.css";
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
         footerControl
         footerControlOrientation="vertical"
       />
+
+      <Select/>
     </main>
   );
 }
