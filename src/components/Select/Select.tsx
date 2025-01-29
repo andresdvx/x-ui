@@ -1,11 +1,19 @@
-import './select.css'
+import SelectItem, { SelectItemProps } from "./SelectItem";
+import "./select.css";
 
-export const Select = () => {
+interface SelectProps
+  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "id"> {
+  items: SelectItemProps[];
+}
+
+export const Select = ({ items }: SelectProps) => {
   return (
     <select id="select">
-      <option className='option'>Si</option>
-      <option>No</option>
-      <option>No Disponible</option>
+      {items.map((item) => {
+        return (
+          <SelectItem key={item.value} label={item.label} value={item.value} />
+        );
+      })}
     </select>
-  )
-}
+  );
+};
