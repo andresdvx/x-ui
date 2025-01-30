@@ -15,9 +15,10 @@ function App() {
   // ];
 
   const options = [
-    { label: "perro", value: "perro" },
-    { label: "gato", value: "gato" },
-    { label: "zorro", value: "zorro" },
+    { label: "Dog", value: "Dog" },
+    { label: "Cat", value: "Cat" },
+    { label: "Hamster", value: "hamster" },
+    { label: "Birds", value: "bamster" },
   ];
 
   return (
@@ -29,8 +30,8 @@ function App() {
         height: "100vh",
         backgroundColor: "#1c2b38",
       }}
-      >
-      <Select items={options}/>
+    >
+      <Select id="select" items={options} label="select an pet" size="md" />
       {/* <Carousel
         style={{ width: "400px", height: "360px" }}
         images={images}
