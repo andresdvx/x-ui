@@ -4,7 +4,7 @@ export interface SelectItemProps {
 }
 
 const SelectItem = ({ label, value }: SelectItemProps) => {
-  return <option value={value}>{label}</option>;
+  return <option data-custom="true" value={value} className="">{label}</option>;
 };
 
 export default SelectItem;
