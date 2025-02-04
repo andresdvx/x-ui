@@ -1,5 +1,5 @@
 // import { Carousel } from "../index";
-import { useState } from "react";
+// import { useState } from "react";
 import { Select } from "../index";
 import "./App.css";
 
@@ -16,27 +16,30 @@ function App() {
   // ];
 
   const options = [
-    { label: "Dog", value: "Dog" },
-    { label: "Cat", value: "Cat" },
-    { label: "Hamster", value: "Hamster" },
-    { label: "Birds", value: "Birds" },
+    { label: "Attack on Titan", value: "Attack on Titan" },
+    { label: "One-Punch Man", value: "One-Punch Man" },
+    { label: "Fullmetal Alchemist: Brotherhood", value: "Fullmetal Alchemist: Brotherhood" },
+    { label: "Demon Slayer", value: "Demon Slayer" },
+    { label: "Naruto", value: "Naruto" },
+    { label: "One Piece", value: "One Piece" },
+    { label: "Death Note", value: "Death Note" },
+    { label: "My Hero Academia", value: "My Hero Academia" },
   ];
 
-  const [state, setState] = useState<{ label: string; value: string } | null>(
-    null
-  );
+  // const [state, setState] = useState<{ label: string; value: string } | null>(
+  //   null
+  // );
 
   return (
-    <main className="bg-slate-700 h-screen flex justify-around items-center">
+    <main className="h-screen flex justify-around items-center">
       <Select
         id="select"
         items={options}
-        label="select an pet"
+        label="Select an anime"
         className="w-xs h-12"
-        onSelectChange={(selectedItem) => setState(selectedItem)}
       />
 
-      {state && <p>{JSON.stringify(state)}</p>}
+      {/* {state && <p>{JSON.stringify(state)}</p>} */}
       {/* <Carousel
         style={{ width: "400px", height: "360px" }}
         images={images}

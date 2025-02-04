@@ -12,7 +12,7 @@ const SelectItem = ({ label, value, selectedItem, ...props }: SelectItemProps) =
       {...props}
       className="rounded-md flex items-center cursor-pointer"
     >
-      <div className="w-full flex justify-between !p-2 rounded-sm hover:bg-gray-300 transition-all duration-500">
+      <div className="w-full flex justify-between !p-2 rounded-sm hover:bg-gray-200 transition-all duration-300">
         <p className="text-sm">{label}</p>
         <p className="text-sm">
           {selectedItem && selectedItem.value === value ? <CheckIcon /> : null}
