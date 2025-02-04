@@ -1,4 +1,5 @@
 // import { Carousel } from "../index";
+import { useState } from "react";
 import { Select } from "../index";
 import "./App.css";
 
@@ -17,21 +18,25 @@ function App() {
   const options = [
     { label: "Dog", value: "Dog" },
     { label: "Cat", value: "Cat" },
-    { label: "Hamster", value: "hamster" },
-    { label: "Birds", value: "bamster" },
+    { label: "Hamster", value: "Hamster" },
+    { label: "Birds", value: "Birds" },
   ];
 
+  const [state, setState] = useState<{ label: string; value: string } | null>(
+    null
+  );
+
   return (
-    <main
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#1c2b38",
-      }}
-    >
-      <Select id="select" items={options} label="select an pet" size="md" />
+    <main className="bg-slate-700 h-screen flex justify-around items-center">
+      <Select
+        id="select"
+        items={options}
+        label="select an pet"
+        className="w-xs h-12"
+        onSelectChange={(selectedItem) => setState(selectedItem)}
+      />
+
+      {state && <p>{JSON.stringify(state)}</p>}
       {/* <Carousel
         style={{ width: "400px", height: "360px" }}
         images={images}

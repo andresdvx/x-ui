@@ -1,53 +1,73 @@
-import { useState } from "react";
-import { selectSizes } from "./data";
-import { SelectItemProps } from "./SelectItem";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState } from "react";
+import SelectItem, { SelectItemProps } from "./SelectItem";
 
 interface SelectProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "size"> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "size" | "onChange"> {
   items: SelectItemProps[];
-  label?: string;
-  size?: "sm" | "md" | "lg" | "xl";
+  onSelectChange?: (selectedItem: SelectItemProps | null) => void;
+  label?: string
 }
 
 export const Select = ({
   items,
-  size = "sm",
+  onSelectChange,
   label = "Select an option",
   className,
   ...props
 }: SelectProps) => {
-  const [selected, setSelected] = useState<string>("");
-  const [open, setOpen] = useState(false);
+
+  const [selected, setSelected] = useState<SelectItemProps | undefined>(undefined);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleSelectItemClick = (item: SelectItemProps) => {
+
+    if (selected && selected.value === item.value) {
+      setSelected(undefined);
+      setOpen(false);
+      if (onSelectChange) onSelectChange(null);
+      return;
+    }
+
+    setSelected(item);
+    setOpen(false);
+    if (onSelectChange) onSelectChange(item);
+  };
 
   return (
     <div
-      className={`w-[${selectSizes[size]}] relative bg-white select-none rounded-md transition-all duration-300 ${className}`}
       {...props}
+      className={`relative bg-white select-none rounded-md ${className}`}
     >
       <div
         onClick={() => setOpen(!open)}
-        className={`h-12 rounded-md cursor-pointer `}
+        className={`h-full rounded-md cursor-pointer`}
+        role="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
       >
-        <p className="text-sm text-left !pl-1">{label}</p>
-        <p className="text-sm text-left !pl-1">{selected}</p>
+        <p className="text-sm text-left !px-3">{label}</p>
+        <p className="text-sm text-left !px-3">{selected ? selected.label : ""}</p>
       </div>
 
       {open && (
-        <ul className="absolute w-full !mt-1 bg-white rounded-md">
+        <ul
+          className="absolute w-full !mt-1 flex flex-col gap-1 !p-1 bg-white rounded-md"
+          role="listbox"
+        >
           {items.map((item) => (
-            <li
+            <SelectItem
               key={item.value}
-              className="h-10 rounded-md flex items-center !p-1 cursor-pointer"
-              onClick={() => {
-                setSelected(item.value);
-                setOpen(false);
-              }}
-            >
-              <p className="w-full text-sm !p-1 inline-block rounded-md hover:bg-gray-500 transition-all duration-300">{item.label}</p>
-            </li>
+              value={item.value}
+              label={item.label}
+              selectedItem={selected || undefined}
+              onClick={() => handleSelectItemClick(item)}
+            />
           ))}
         </ul>
       )}
     </div>
   );
 };
+
+export default Select;
