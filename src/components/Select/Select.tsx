@@ -18,6 +18,7 @@ export const Select = ({
 }: SelectProps) => {
 
   const [selected, setSelected] = useState<SelectItemProps | undefined>(undefined);
+
   const [open, setOpen] = useState<boolean>(false);
 
   const handleSelectItemClick = (item: SelectItemProps) => {
@@ -37,23 +38,24 @@ export const Select = ({
   return (
     <div
       {...props}
-      className={`relative bg-white select-none rounded-md ${className}`}
+      className={`relative bg-white select-none border-1 border-[#8c8c8c] hover:border-[#0484ff] rounded-md transition-all duration-300 ${className} `}
     >
       <div
         onClick={() => setOpen(!open)}
-        className={`h-full rounded-md cursor-pointer`}
+        className={`h-full rounded-md cursor-pointer flex flex-col justify-center `}
         role="button"
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <p className="text-sm text-left !px-3">{label}</p>
-        <p className="text-sm text-left !px-3">{selected ? selected.label : ""}</p>
+        <p className={`h-[50%] text-md !px-3 text-[#8c8c8c] transition-all duration-200 ${(open && !selected) && '-translate-y-2 text-sm'} ${selected && 'text-sm'}`}>{label}</p>
+      { selected && <p className="h-[50%] text-sm text-left !px-3">{selected ? selected.label : ""}</p>}
       </div>
 
       {open && (
         <ul
-          className="absolute w-full !mt-1 flex flex-col gap-1 !p-1 bg-white rounded-md"
+          className={`absolute w-full max-h-42 ${items.length > 5 && 'overflow-y-scroll'} scroll-smooth !mt-1 flex flex-col gap-1 !p-1 bg-white rounded-md shadow-lg`}
           role="listbox"
+          style={{msOverflowStyle: 'none', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch'}}
         >
           {items.map((item) => (
             <SelectItem
