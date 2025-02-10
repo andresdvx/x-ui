@@ -22,8 +22,7 @@ function App() {
     { label: "Demon Slayer", value: "Demon Slayer" },
     { label: "Naruto", value: "Naruto" },
     { label: "One Piece", value: "One Piece" },
-    { label: "Death Note", value: "Death Note" },
-    { label: "My Hero Academia", value: "My Hero Academia" },
+
   ];
 
   // const [state, setState] = useState<{ label: string; value: string } | null>(
