@@ -36,6 +36,7 @@ function App() {
         items={options}
         label="Select an anime"
         className="w-xs h-12"
+        multiple
       />
 
       {/* {state && <p>{JSON.stringify(state)}</p>} */}
