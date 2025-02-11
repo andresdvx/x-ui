@@ -1,5 +1,5 @@
 // import { Carousel } from "../index";
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Select } from "../index";
 import "./App.css";
 
@@ -25,9 +25,13 @@ function App() {
 
   ];
 
-  // const [state, setState] = useState<{ label: string; value: string } | null>(
-  //   null
-  // );
+  const [state, setState] = useState<{ label: string; value: string } | { label: string; value: string }[] | null>(
+    null
+ );
+
+ useEffect(()=>{
+  console.log(state)
+ }, [state])
 
   return (
     <main className="h-screen flex justify-around items-center">
@@ -37,9 +41,8 @@ function App() {
         label="Select an anime"
         className="w-xs h-12"
         multiple
+        onSelectChange={(v) => setState(v)}
       />
-
-      {/* {state && <p>{JSON.stringify(state)}</p>} */}
       {/* <Carousel
         style={{ width: "400px", height: "360px" }}
         images={images}

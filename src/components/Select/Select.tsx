@@ -31,7 +31,7 @@ export const Select = ({
     if (!Array.isArray(selected) && !Array.isArray(item)) {
       if (multiple && selected && selected.value !== item.value) {
         setSelected(Array.from([selected, item]));
-        if (onSelectChange) onSelectChange(item);
+        if (onSelectChange) onSelectChange(selected);
         return;
       }
 
@@ -44,15 +44,15 @@ export const Select = ({
     }
 
     if (Array.isArray(selected) && !Array.isArray(item) && multiple) {
-        if (selected.some(it => it.value == item.value)) {
-          setSelected(selected.filter(it => it.value !== item.value));
-          if (onSelectChange) onSelectChange(selected.filter(it => it.value !== item.value));
-          return;
-        }
-
-        setSelected([...selected, item]);
-        if (onSelectChange) onSelectChange(item);
+      if (selected.some(it => it.value == item.value)) {
+        setSelected(selected.filter(it => it.value !== item.value));
+        if (onSelectChange) onSelectChange(selected.filter(it => it.value !== item.value));
         return;
+      }
+
+      setSelected([...selected, item]);
+      if (onSelectChange) onSelectChange(selected);
+      return;
     }
 
     setSelected(item);
@@ -86,10 +86,11 @@ export const Select = ({
         {selected && (
           <p className="absolute top-6 left-3 text-sm text-gray-800">
             {Array.isArray(selected)
-              ? selected.map((item) => ', ' + item.label)
+              ? selected.map((item) => item.label).join(", ")
               : selected.label}
           </p>
         )}
+
       </div>
 
       {open && (
