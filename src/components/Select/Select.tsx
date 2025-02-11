@@ -90,9 +90,7 @@ export const Select = ({
               : selected.label}
           </p>
         )}
-
       </div>
-
       {open && (
         <ul
           className={`absolute w-full max-h-42 ${items.length > 4 && "overflow-y-scroll"
