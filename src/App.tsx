@@ -41,7 +41,7 @@ function App() {
         label="Select an anime"
         className="w-xs h-12"
         multiple
-        onSelectChange={(v) => setState(v)}
+        onValueChange={(value) => setState(value)}
       />
       {/* <Carousel
         style={{ width: "400px", height: "360px" }}

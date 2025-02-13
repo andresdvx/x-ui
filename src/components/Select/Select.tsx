@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SelectItem, { SelectItemProps } from "./SelectItem";
 import ArrowIcon from "./svg/ArrowIcon";
 
@@ -8,7 +7,7 @@ interface SelectProps
   items: SelectItemProps[];
   label?: string;
   multiple?: boolean;
-  onSelectChange?: (selectedItem: SelectItemProps | SelectItemProps[] | null) => void;
+  onValueChange?: (selectedItem: SelectItemProps | SelectItemProps[] | null) => void;
 }
 
 export const Select = ({
@@ -16,28 +15,29 @@ export const Select = ({
   label = "Select an option",
   className,
   multiple = false,
-  onSelectChange,
+  onValueChange,
   ...props
 }: SelectProps) => {
 
-  const [selected, setSelected] = useState<SelectItemProps | SelectItemProps[] | undefined>(undefined);
+  const [selected, setSelected] = useState<SelectItemProps | SelectItemProps[] | null>(null);
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleSelectItemClick = (item: SelectItemProps | SelectItemProps[]) => {
+  useEffect(()=>{
+    onValueChange && onValueChange(selected ?? null);
+  }, [selected, onValueChange])
 
+  const handleSelectItemClick = (item: SelectItemProps | SelectItemProps[]) => {
 
     if (!Array.isArray(selected) && !Array.isArray(item)) {
       if (multiple && selected && selected.value !== item.value) {
         setSelected(Array.from([selected, item]));
-        if (onSelectChange) onSelectChange(selected);
         return;
       }
 
       if (selected && selected.value === item.value) {
-        setSelected(undefined);
+        setSelected(null);
         setOpen(false);
-        if (onSelectChange) onSelectChange(null);
         return;
       }
     }
@@ -47,23 +47,19 @@ export const Select = ({
 
         if(selected.length === 2) {
           setSelected(selected.filter(it => it.value !== item.value)[0]);
-          if (onSelectChange) onSelectChange(selected.filter(it => it.value !== item.value)[0]);
           return;
         }
 
         setSelected(selected.filter(it => it.value !== item.value));
-        if (onSelectChange) onSelectChange(selected.filter(it => it.value !== item.value));
         return;
       }
 
       setSelected([...selected, item]);
-      if (onSelectChange) onSelectChange(selected);
       return;
     }
 
     setSelected(item);
     setOpen(false);
-    if (onSelectChange) onSelectChange(item);
   };
 
   return (
