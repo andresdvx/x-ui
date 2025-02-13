@@ -1,9 +1,12 @@
 import CheckIcon from "./svg/CheckIcon";
 
-export interface SelectItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
+export interface SelectItemProps extends IFunction, React.LiHTMLAttributes<HTMLLIElement> {
   label: string;
   value: string;
-  selectedItem?: { label: string; value: string; } | { label: string; value: string; }[] | undefined;
+}
+
+interface IFunction {
+  selectedItem?: SelectItemProps | SelectItemProps[];
 }
 
 const SelectItem = ({ label, value, selectedItem, ...props }: SelectItemProps) => {
