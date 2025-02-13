@@ -43,6 +43,12 @@ function App() {
         multiple
         onValueChange={(value) => setState(value)}
       />
+      {
+        Array.isArray(state) ? JSON.stringify(state) : (
+           JSON.stringify(state)
+
+        )
+      }
       {/* <Carousel
         style={{ width: "400px", height: "360px" }}
         images={images}
