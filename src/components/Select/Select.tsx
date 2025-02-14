@@ -7,7 +7,9 @@ interface SelectProps
   items: SelectItemProps[];
   label?: string;
   multiple?: boolean;
-  onValueChange?: (selectedItem: SelectItemProps | SelectItemProps[] | null) => void;
+  onValueChange?: (
+    selectedItem: SelectItemProps | SelectItemProps[] | null
+  ) => void;
 }
 
 export const Select = ({
@@ -18,17 +20,17 @@ export const Select = ({
   onValueChange,
   ...props
 }: SelectProps) => {
-
-  const [selected, setSelected] = useState<SelectItemProps | SelectItemProps[] | null>(null);
+  const [selected, setSelected] = useState<
+    SelectItemProps | SelectItemProps[] | null
+  >(null);
 
   const [open, setOpen] = useState<boolean>(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     onValueChange && onValueChange(selected ?? null);
-  }, [selected, onValueChange])
+  }, [selected, onValueChange]);
 
   const handleSelectItemClick = (item: SelectItemProps | SelectItemProps[]) => {
-
     if (!Array.isArray(selected) && !Array.isArray(item)) {
       if (multiple && selected && selected.value !== item.value) {
         setSelected(Array.from([selected, item]));
@@ -43,14 +45,13 @@ export const Select = ({
     }
 
     if (Array.isArray(selected) && !Array.isArray(item) && multiple) {
-      if (selected.some(it => it.value == item.value)) {
-
-        if(selected.length === 2) {
-          setSelected(selected.filter(it => it.value !== item.value)[0]);
+      if (selected.some((it) => it.value == item.value)) {
+        if (selected.length === 2) {
+          setSelected(selected.filter((it) => it.value !== item.value)[0]);
           return;
         }
 
-        setSelected(selected.filter(it => it.value !== item.value));
+        setSelected(selected.filter((it) => it.value !== item.value));
         return;
       }
 
@@ -74,23 +75,33 @@ export const Select = ({
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <p className={`absolute left-3 transition-all duration-300 ${selected || open? "top-0.5 text-sm text-[#8c8c8c]": "top-1/2 -translate-y-1/2 text-md text-gray-500"}`}>
+        <p
+          className={`absolute left-3 transition-all duration-300 ${
+            selected || open
+              ? "top-0.5 text-sm text-[#8c8c8c]"
+              : "top-1/2 -translate-y-1/2 text-md text-gray-500"
+          }`}
+        >
           {label}
         </p>
-        
-        <ArrowIcon open={open}/>
-          
+
+        <ArrowIcon open={open} />
+
         {selected && (
           <p className="absolute top-6 left-3 text-sm text-gray-800">
             {Array.isArray(selected)
-              ? selected.length > 1 ? `${selected.length} items selected` : selected[0].label
+              ? selected.length > 1
+                ? `${selected.length} items selected`
+                : selected[0].label
               : selected.label}
           </p>
         )}
       </div>
       {open && (
         <ul
-          className={`absolute w-full max-h-42 ${items.length > 4 && "overflow-y-scroll"} scroll-smooth !mt-1 flex flex-col gap-1 !p-1 bg-white rounded-md shadow-lg`}
+          className={`absolute w-full max-h-42 ${
+            items.length > 4 && "overflow-y-scroll"
+          } scroll-smooth !mt-1 flex flex-col gap-1 !p-1 bg-white rounded-md shadow-lg`}
           role="listbox"
           style={{
             msOverflowStyle: "none",
@@ -100,7 +111,9 @@ export const Select = ({
         >
           {items.map((item) => (
             <SelectItem
+              className={`${item.disabled ? "opacity-50" : ""}`}
               key={item.value}
+              disabled={item.disabled}
               value={item.value}
               label={item.label}
               selectedItem={selected || undefined}
