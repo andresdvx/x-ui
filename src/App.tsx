@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Select } from "../index";
 import "./App.css";
+import { SelectItemProps } from "./components/Select/SelectItem";
 
 function App() {
   // const images = [
@@ -15,23 +16,23 @@ function App() {
   //   "https://i.pinimg.com/236x/ab/d4/ec/abd4ec7695cd5b5b7c172df3ab628901.jpg",
   // ];
 
-  const options = [
-    { label: "Attack on Titan", value: "Attack on Titan" },
-    { label: "One-Punch Man", value: "One-Punch Man" },
-    { label: "Fullmetal Alchemist: Brotherhood", value: "Fullmetal Alchemist: Brotherhood" },
-    { label: "Demon Slayer", value: "Demon Slayer" },
-    { label: "Naruto", value: "Naruto" },
-    { label: "One Piece", value: "One Piece" },
+  const options: SelectItemProps[] = [
+    { label: "Attack on Titan", value: "Attack on Titan", disabled: true },
+    { label: "One-Punch Man", value: "One-Punch Man"},
+    { label: "Fullmetal Alchemist: Brotherhood", value: "Fullmetal Alchemist: Brotherhood", disabled : true },
+    { label: "Demon Slayer", value: "Demon Slayer"},
+    { label: "Naruto", value: "Naruto", disabled: true},
+    { label: "One Piece", value: "One Piece"},
 
   ];
 
   const [state, setState] = useState<{ label: string; value: string } | { label: string; value: string }[] | null>(
     null
- );
+  );
 
- useEffect(()=>{
-  console.log(state)
- }, [state])
+  useEffect(() => {
+    console.log(state)
+  }, [state])
 
   return (
     <main className="h-screen flex justify-around items-center">
@@ -43,12 +44,12 @@ function App() {
         multiple
         onValueChange={(value) => setState(value)}
       />
-      {
+      {/* {
         Array.isArray(state) ? JSON.stringify(state) : (
            JSON.stringify(state)
 
         )
-      }
+      } */}
       {/* <Carousel
         style={{ width: "400px", height: "360px" }}
         images={images}
