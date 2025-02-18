@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // import { Carousel } from "../index";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Select } from "../index";
 import "./App.css";
 import { SelectItemProps } from "./components/Select/SelectItem";
@@ -17,28 +18,24 @@ function App() {
   // ];
 
   const options: SelectItemProps[] = [
-    { label: "Attack on Titan", value: "Attack on Titan", disabled: true },
-    { label: "One-Punch Man", value: "One-Punch Man"},
+    { label: "Attack on Titan", value: "Attack on Titan"},
+    { label: "One-Punch Man", value: "One-Punch Man", disabled: true },
     { label: "Fullmetal Alchemist: Brotherhood", value: "Fullmetal Alchemist: Brotherhood", disabled : true },
     { label: "Demon Slayer", value: "Demon Slayer"},
-    { label: "Naruto", value: "Naruto", disabled: true},
+    { label: "Naruto", value: "Naruto"},
     { label: "One Piece", value: "One Piece"},
-
   ];
 
   const [state, setState] = useState<{ label: string; value: string } | { label: string; value: string }[] | null>(
     null
   );
 
-  useEffect(() => {
-    console.log(state)
-  }, [state])
-
   return (
     <main className="h-screen flex justify-around items-center">
       <Select
         id="select"
         items={options}
+        selectedValues={["One-Punch Man",'One Piece']}
         label="Select an anime"
         className="w-xs h-12"
         multiple
