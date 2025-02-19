@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Select } from "../index";
 import "./App.css";
-import { SelectItemProps } from "./components/Select/SelectItem";
+import { SelectItemsValues } from "./components/Select/SelectItem";
 
 function App() {
   // const images = [
@@ -17,12 +17,12 @@ function App() {
   //   "https://i.pinimg.com/236x/ab/d4/ec/abd4ec7695cd5b5b7c172df3ab628901.jpg",
   // ];
 
-  const options: SelectItemProps[] = [
+  const options: SelectItemsValues[] = [
     { label: "Attack on Titan", value: "Attack on Titan"},
     { label: "One-Punch Man", value: "One-Punch Man", disabled: true },
-    { label: "Fullmetal Alchemist: Brotherhood", value: "Fullmetal Alchemist: Brotherhood", disabled : true },
+    { label: "Fullmetal Alchemist: Brotherhood", value: "Fullmetal Alchemist: Brotherhood"},
     { label: "Demon Slayer", value: "Demon Slayer"},
-    { label: "Naruto", value: "Naruto"},
+    { label: "Naruto", value: "Naruto", disabled : true},
     { label: "One Piece", value: "One Piece"},
   ];
 
@@ -33,6 +33,7 @@ function App() {
   useEffect(()=>{
     console.log(state)
   },[state])
+
   return (
     <main className="h-screen flex justify-around items-center">
       <Select
