@@ -33,6 +33,11 @@ export const Select = ({
     });
   }, [selectedValues, items])
 
+
+  useEffect(()=>{
+    setSelected(itemsToRender.current.filter((item) => item.selected === true))
+  },[])
+
   useEffect(() => {
     onValueChange && onValueChange(selected ?? []);
   }, [onValueChange, selected]);
@@ -105,7 +110,7 @@ export const Select = ({
               disabled={item.disabled}
               value={item.value}
               label={item.label}
-              selectedItem={selected || undefined}
+              selectedItem={selected || []}
               onClick={() => handleSelectItemClick(item)}
             />
           ))}
