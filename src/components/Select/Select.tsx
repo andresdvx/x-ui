@@ -7,7 +7,7 @@ interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "size" 
   selectedValues?: string[];
   label?: string;
   multiple?: boolean;
-  onValueChange?: (selectedItem: SelectItemProps | SelectItemProps[] | null) => void;
+  onValueChange?: (selectedItem: SelectItemProps[] | []) => void;
 }
 
 export const Select = ({
@@ -20,55 +20,38 @@ export const Select = ({
   ...props
 }: SelectProps) => {
 
-  const [selected, setSelected] = useState<SelectItemProps | SelectItemProps[] | null>(null);
+  const [selected, setSelected] = useState<SelectItemProps[]>([]);
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const itemsToRender = useRef<SelectItemProps[] | null>(items);
+  const itemsToRender = useRef<SelectItemProps[] | []>(items);
 
-  useEffect(()=>{
-    itemsToRender.current = items.filter((item : SelectItemProps) => {
-      if(selectedValues?.includes(item.value))return [item, item.selected = true]
-      if(!selectedValues?.includes(item.value))return [item]
+  useEffect(() => {
+    itemsToRender.current = items.filter((item: SelectItemProps) => {
+      if (selectedValues?.includes(item.value)) return [item, item.selected = true]
+      if (!selectedValues?.includes(item.value)) return [item]
     });
-    console.log(itemsToRender.current);
   }, [selectedValues, items])
 
   useEffect(() => {
-    onValueChange && onValueChange(selected ?? null);
+    onValueChange && onValueChange(selected ?? []);
   }, [onValueChange, selected]);
 
-  const handleSelectItemClick = (item: SelectItemProps | SelectItemProps[]) => {
-    if (!Array.isArray(selected) && !Array.isArray(item)) {
-      if (multiple && selected && selected.value !== item.value) {
-        setSelected(Array.from([selected, item]));
-        return;
-      }
 
-      if (selected && selected.value === item.value) {
-        setSelected(null);
-        setOpen(false);
-        return;
-      }
-    }
+  const handleSelectItemClick = (item: SelectItemProps) => {
 
-    if (Array.isArray(selected) && !Array.isArray(item) && multiple) {
+    if (selected.length > 0 && multiple) {
       if (selected.some((it) => it.value == item.value)) {
-        if (selected.length === 2) {
-          setSelected(selected.filter((it) => it.value !== item.value)[0]);
-          return;
-        }
-
         setSelected(selected.filter((it) => it.value !== item.value));
         return;
       }
-
       setSelected([...selected, item]);
       return;
     }
 
-    setSelected(item);
+    setSelected([item]);
     setOpen(false);
+    return;
   };
 
   return (
@@ -84,9 +67,9 @@ export const Select = ({
         aria-expanded={open}
       >
         <p
-          className={`absolute left-3 transition-all duration-300 ${selected || open
-              ? "top-0.5 text-sm text-[#8c8c8c]"
-              : "top-1/2 -translate-y-1/2 text-md text-gray-500"
+          className={`absolute left-3 transition-all duration-300 ${selected.length > 0 || open
+            ? "top-0.5 text-sm text-[#8c8c8c]"
+            : "top-1/2 -translate-y-1/2 text-md text-gray-500"
             }`}
         >
           {label}
@@ -94,13 +77,13 @@ export const Select = ({
 
         <ArrowIcon open={open} />
 
-        {selected && (
+        {selected.length > 0 && (
           <p className="absolute top-6 left-3 text-sm text-gray-800">
-            {Array.isArray(selected)
-              ? selected.length > 1
+            {
+              selected.length > 1
                 ? `${selected.length} items selected`
                 : selected[0].label
-              : selected.label}
+            }
           </p>
         )}
       </div>
