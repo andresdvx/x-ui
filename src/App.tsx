@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // import { Carousel } from "../index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Select } from "../index";
 import "./App.css";
 import { SelectItemProps } from "./components/Select/SelectItem";
@@ -26,10 +26,13 @@ function App() {
     { label: "One Piece", value: "One Piece"},
   ];
 
-  const [state, setState] = useState<{ label: string; value: string } | { label: string; value: string }[] | null>(
-    null
+  const [state, setState] = useState<{ label: string; value: string }[] | []>(
+    []
   );
 
+  useEffect(()=>{
+    console.log(state)
+  },[state])
   return (
     <main className="h-screen flex justify-around items-center">
       <Select
