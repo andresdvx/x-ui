@@ -39,6 +39,7 @@ export const Select = ({
   },[])
 
   useEffect(() => {
+    selected.length == 0 ? setOpen(false) : null;
     onValueChange && onValueChange(selected ?? []);
   }, [onValueChange, selected]);
 
@@ -54,6 +55,11 @@ export const Select = ({
       return;
     }
 
+    if(selected != null && selected.some((it) => it.value == item.value) && !multiple){
+      setSelected([]);
+      setOpen(false);
+      return;
+    }
     setSelected([item]);
     setOpen(false);
     return;
