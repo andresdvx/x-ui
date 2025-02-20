@@ -39,7 +39,7 @@ function App() {
       <Select
         id="select"
         items={options}
-        selectedValues={['Attack on Titan']}
+        selectedValues={['Attack on Titan', 'Naruto']}
         label="Select an anime"
         className="w-xs h-12"
         multiple
