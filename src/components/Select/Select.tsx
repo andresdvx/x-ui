@@ -68,7 +68,7 @@ export const Select = ({
   return (
     <div
       {...props}
-      className={`relative bg-white select-none border-1 border-[#8c8c8c] hover:border-[#0484ff] hover:shadow-[0_0_3px_#0484ff] rounded-md transition-all duration-300 ${className} `}
+      className={`relative bg-[#f4f4f5] select-none rounded-md transition-all duration-200 ${className} `}
     >
       <div
         onClick={() => setOpen(!open)}

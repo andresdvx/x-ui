@@ -35,11 +35,11 @@ function App() {
   },[state])
 
   return (
-    <main className="h-screen flex justify-around items-center">
+    <main className="h-screen flex justify-around items-center bg-white">
       <Select
         id="select"
         items={options}
-        selectedValues={['Attack on Titan', 'Naruto']}
+        selectedValues={['Attack on Titan']}
         label="Select an anime"
         className="w-xs h-12"
         multiple
