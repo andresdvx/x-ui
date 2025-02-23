@@ -41,7 +41,8 @@ function App() {
         items={options}
         selectedValues={['Attack on Titan']}
         label="Select an anime"
-        className="w-xs h-12"
+        itemsLabel="Animes"
+        className="w-[270px] h-12"
         multiple
         onValueChange={(value) => setState(value)}
       />
