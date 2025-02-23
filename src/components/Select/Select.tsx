@@ -6,6 +6,7 @@ interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "size" 
   items: SelectItemProps[];
   selectedValues?: string[];
   label?: string;
+  itemsLabel? : string;
   multiple?: boolean;
   onValueChange?: (selectedItem: SelectItemProps[] | []) => void;
 }
@@ -14,6 +15,7 @@ export const Select = ({
   items,
   selectedValues,
   label = "Select an option",
+  itemsLabel = "",
   className,
   multiple = false,
   onValueChange,
@@ -34,9 +36,9 @@ export const Select = ({
   }, [selectedValues, items])
 
 
-  useEffect(()=>{
+  useEffect(() => {
     setSelected(itemsToRender.current.filter((item) => item.selected === true))
-  },[])
+  }, [])
 
   useEffect(() => {
     selected.length == 0 ? setOpen(false) : null;
@@ -55,7 +57,7 @@ export const Select = ({
       return;
     }
 
-    if(selected != null && selected.some((it) => it.value == item.value) && !multiple){
+    if (selected != null && selected.some((it) => it.value == item.value) && !multiple) {
       setSelected([]);
       setOpen(false);
       return;
@@ -109,6 +111,13 @@ export const Select = ({
             WebkitOverflowScrolling: "touch",
           }}
         >
+          {
+            itemsLabel && (
+              <li className="!pl-1 !pb-1">
+                <p className="text-gray-500 !ml-1">{itemsLabel}</p>
+              </li>
+            )
+          }
           {itemsToRender.current?.map((item) => (
             <SelectItem
               className={`${item.disabled ? "opacity-50" : ""}`}
