@@ -43,7 +43,7 @@ const SelectItem = ({
       onClick={handleClick}
       className={`rounded-md flex items-center cursor-pointer ${className}`}
     >
-      <div className="w-full flex justify-between !p-2 rounded-sm hover:bg-gray-200 transition-all duration-300">
+      <div className="w-full flex justify-between !p-2 rounded-sm hover:bg-[#f4f4f5] transition-all duration-300">
         <p className="text-sm">{label}</p>
         <p className="text-sm">
           {selectedItem && selectedItem.some((item) => item.value == value) ? (
