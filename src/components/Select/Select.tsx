@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import SelectItem, { SelectItemProps } from "./SelectItem";
 import ArrowIcon from "./svg/ArrowIcon";
+import { useSelect } from "./hooks/useSelect";
 
 interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "size" | "onChange"> {
   items: SelectItemProps[];
@@ -22,50 +23,7 @@ export const Select = ({
   ...props
 }: SelectProps) => {
 
-  const [selected, setSelected] = useState<SelectItemProps[]>([]);
-
-  const [open, setOpen] = useState<boolean>(false);
-
-  const itemsToRender = useRef<SelectItemProps[] | []>(items);
-
-  useEffect(() => {
-    itemsToRender.current = items.filter((item: SelectItemProps) => {
-      if (selectedValues?.includes(item.value)) return [item, item.selected = true]
-      if (!selectedValues?.includes(item.value)) return [item]
-    });
-  }, [selectedValues, items])
-
-
-  useEffect(() => {
-    setSelected(itemsToRender.current.filter((item) => item.selected === true))
-  }, [])
-
-  useEffect(() => {
-    selected.length == 0 ? setOpen(false) : null;
-    onValueChange && onValueChange(selected ?? []);
-  }, [onValueChange, selected]);
-
-
-  const handleSelectItemClick = (item: SelectItemProps) => {
-
-    if (selected.length > 0 && multiple) {
-      if (selected.some((it) => it.value == item.value)) {
-        setSelected(selected.filter((it) => it.value !== item.value));
-        return;
-      }
-      setSelected([...selected, item]);
-      return;
-    }
-
-    if (selected != null && selected.some((it) => it.value == item.value) && !multiple) {
-      setSelected([]);
-      setOpen(false);
-      return;
-    }
-    setSelected([item]);
-    setOpen(false);
-    return;
-  };
+  const {selected, itemsToRender, setOpen, open, handleSelectItemClick} = useSelect({ items, selectedValues, multiple, onValueChange });
 
   return (
     <div
@@ -90,15 +48,7 @@ export const Select = ({
 
         <ArrowIcon open={open} />
 
-        {selected.length > 0 && (
-          <p className="absolute top-6 left-3 text-sm text-gray-800">
-            {
-              selected.length > 1
-                ? `${selected.length} items selected`
-                : selected[0].label
-            }
-          </p>
-        )}
+        <SelectedItemsDisplay selected={selected} />
       </div>
       {open && (
         <ul
@@ -134,5 +84,15 @@ export const Select = ({
     </div>
   );
 };
+
+const SelectedItemsDisplay = ({ selected }: { selected: SelectItemProps[] }) => {
+  if (selected.length === 0) return null;
+  return (
+    <p className="absolute top-6 left-3 text-sm text-gray-800">
+      {selected.length > 1 ? `${selected.length} items selected` : selected[0].label}
+    </p>
+  );
+};
+
 
 export default Select;
